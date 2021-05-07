@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>resources/backGround.png</file>
+        <file>resources/borders.png</file>
+    </qresource>
+    <qresource prefix="/buttons">
+        <file>resources/quitbutton.png</file>
+        <file>resources/quitclickedbutton.png</file>
+        <file>resources/quithoverbutton.png</file>
+        <file>resources/startbutton.png</file>
+        <file>resources/startclickedbutton.png</file>
+        <file>resources/starthoverbutton.png</file>
+    </qresource>
+</RCC>
