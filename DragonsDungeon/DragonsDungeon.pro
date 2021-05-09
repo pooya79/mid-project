@@ -11,7 +11,9 @@ SOURCES += \
         button.cpp \
         game.cpp \
         main.cpp \
-        maze.cpp
+        maze.cpp \
+        option.cpp \
+        radiobutton.cpp
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,7 +23,9 @@ SOURCES += \
 HEADERS += \
     button.h \
     game.h \
-    maze.h
+    maze.h \
+    option.h \
+    radiobutton.h
 
 RESOURCES += \
     res.qrc

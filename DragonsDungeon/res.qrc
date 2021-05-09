@@ -10,5 +10,18 @@
         <file>resources/startbutton.png</file>
         <file>resources/startclickedbutton.png</file>
         <file>resources/starthoverbutton.png</file>
+        <file>resources/beginbutton.png</file>
+        <file>resources/beginclickedbutton.png</file>
+        <file>resources/beginhoverbutton.png</file>
+    </qresource>
+    <qresource prefix="/option">
+        <file>resources/base.png</file>
+        <file>resources/columnLine.png</file>
+        <file>resources/rowLine.png</file>
+        <file>resources/slideBar.png</file>
+        <file>resources/handle.png</file>
+        <file>resources/radio.png</file>
+        <file>resources/radiochecked.png</file>
+        <file>resources/radiohover.png</file>
     </qresource>
 </RCC>

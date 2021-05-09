@@ -1,22 +1,27 @@
 #include "game.h"
 #include "button.h"
 #include <QMouseEvent>
-#include <memory>
 #include <QtDebug>
 
-Game::Game(QWidget* parent)
+
+Game::Game(double _sizeRatio, QWidget* parent)
     : QGraphicsView(parent)
+    , sizeRatio {_sizeRatio}
+    , data {}
 {
     // set up the screen
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1200, 800);
-    setBackgroundBrush(QBrush(QImage(":/img/resources/backGround.png")));
+    setFixedSize(1200*sizeRatio, 800*sizeRatio);
+    setBackgroundBrush(QBrush(QImage(":/img/resources/backGround.png").scaled(1200*sizeRatio, 800*sizeRatio)));
 
     // set up the scene
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,1200,800);
+    scene->setSceneRect(0,0,1200*sizeRatio,800*sizeRatio);
     setScene(scene);
+
+    // making ready option menu
+    optionMenu = new Option(sizeRatio);
 }
 
 Game::~Game()
@@ -29,7 +34,8 @@ void Game::displayStartMenu()
     // define border
     QGraphicsPixmapItem* border {new QGraphicsPixmapItem()};
     border->setPixmap(QPixmap(":/img/resources/borders.png").scaled(QSize(351,220)));
-    border->setPos(424.5,290);
+    border->setScale(sizeRatio);
+    border->setPos(424*sizeRatio,290*sizeRatio);
     scene->addItem(border);
 
     // place buttons in border
@@ -44,12 +50,23 @@ void Game::displayStartMenu()
             this, &Game::close);
 }
 
-void Game::displayOptionMenu()
-{
-    qDebug() << "we are in option menu";
-}
 
 void Game::startAndNext()
 {
-    displayOptionMenu();
+    optionMenu->setUp();
+    Button* begin {new Button(QString("begin"), optionMenu)};
+    begin->setScale(sizeRatio);
+    connect(begin, &Button::clicked,
+            this, &Game::startGame);
+    begin->setPos(354*sizeRatio, 610*sizeRatio);
+    scene->clear();
+    scene->addItem(optionMenu);
+}
+
+void Game::startGame()
+{
+    data = optionMenu->getData();
+    for (auto i : data)
+        qDebug() << i;
+    qDebug() << "next";
 }

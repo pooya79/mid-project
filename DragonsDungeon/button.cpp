@@ -1,6 +1,7 @@
 #include "button.h"
 #include <QBrush>
 
+
 Button::Button(QString name, QGraphicsItem* parent)
     : QGraphicsPixmapItem(parent)
 {
