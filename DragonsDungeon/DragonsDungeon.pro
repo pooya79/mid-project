@@ -8,7 +8,10 @@ CONFIG += c++14
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        board.cpp \
         button.cpp \
+        character.cpp \
+        dragon.cpp \
         game.cpp \
         main.cpp \
         maze.cpp \
@@ -21,7 +24,10 @@ SOURCES += \
 #!isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    board.h \
     button.h \
+    character.h \
+    dragon.h \
     game.h \
     maze.h \
     option.h \

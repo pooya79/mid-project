@@ -2,6 +2,10 @@
     <qresource prefix="/img">
         <file>resources/backGround.png</file>
         <file>resources/borders.png</file>
+        <file>resources/startGame.png</file>
+        <file>resources/borders2.png</file>
+        <file>resources/defeat.png</file>
+        <file>resources/victory.png</file>
     </qresource>
     <qresource prefix="/buttons">
         <file>resources/quitbutton.png</file>
@@ -13,6 +17,12 @@
         <file>resources/beginbutton.png</file>
         <file>resources/beginclickedbutton.png</file>
         <file>resources/beginhoverbutton.png</file>
+        <file>resources/awakebutton.png</file>
+        <file>resources/awakeclickedbutton.png</file>
+        <file>resources/awakehoverbutton.png</file>
+        <file>resources/nextbutton.png</file>
+        <file>resources/nextclickedbutton.png</file>
+        <file>resources/nexthoverbutton.png</file>
     </qresource>
     <qresource prefix="/option">
         <file>resources/base.png</file>
@@ -23,5 +33,34 @@
         <file>resources/radio.png</file>
         <file>resources/radiochecked.png</file>
         <file>resources/radiohover.png</file>
+    </qresource>
+    <qresource prefix="/characters">
+        <file>resources/angel.png</file>
+        <file>resources/dwarf.png</file>
+        <file>resources/highelf.png</file>
+        <file>resources/paladincentaur.png</file>
+        <file>resources/deadcentaur.png</file>
+        <file>resources/deaddwarf.png</file>
+        <file>resources/deadelfangel.png</file>
+    </qresource>
+    <qresource prefix="/blocks">
+        <file>resources/entrance.png</file>
+        <file>resources/firepave.png</file>
+        <file>resources/goldpave.png</file>
+        <file>resources/icepave.png</file>
+        <file>resources/pave.png</file>
+        <file>resources/solidwall.png</file>
+        <file>resources/stormpave.png</file>
+        <file>resources/wall.png</file>
+    </qresource>
+    <qresource prefix="/dragons">
+        <file>resources/firefire.png</file>
+        <file>resources/firesleep.png</file>
+        <file>resources/goldfire.png</file>
+        <file>resources/goldsleep.png</file>
+        <file>resources/icefire.png</file>
+        <file>resources/icesleep.png</file>
+        <file>resources/stormfire.png</file>
+        <file>resources/stormsleep.png</file>
     </qresource>
 </RCC>

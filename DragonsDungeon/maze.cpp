@@ -121,7 +121,7 @@ void Maze::createMaze(size_t x, size_t y)
                 break;
             }
         default:
-            randNum = 0;
+            randNum = std::rand() % 4;
         }
     }
 }
@@ -179,12 +179,22 @@ void Maze::placeWall(size_t x, size_t y)
     }
 }
 
-void Maze::solve(size_t algInt)
+std::vector<std::vector<int>> Maze::solve(size_t algInt)
 {
     if (algInt == 1)
         solveDFS(root);
     else if (algInt == 2)
         solveBFS();
+    std::vector<std::vector<int>> mazeData;
+    mazeData.resize(maze.size());
+    for (size_t i{}; i<maze.size(); i++)
+    {
+        for (size_t j{}; j<maze[i].size(); j++)
+        {
+            mazeData[i].push_back(maze[i][j]->getValue());
+        }
+    }
+    return mazeData;
 }
 
 bool Maze::solveDFS(std::shared_ptr<Maze::Node> node)

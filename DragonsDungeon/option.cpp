@@ -24,7 +24,9 @@ Option::Option(double _sizeRatio, QGraphicsItem *parent)
     nColumns->setFont(font);
     nColumns->setPos(800*sizeRatio,170*sizeRatio);
     nColumns->setDefaultTextColor(Qt::white);
-
+    data[2]=1;
+    data[3]=1;
+    data[4]=1;
 }
 
 void Option::setUp()

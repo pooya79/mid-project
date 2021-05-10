@@ -35,7 +35,7 @@ public:
     void createMaze(size_t x, size_t y);
     bool anyEmptyPath(size_t x, size_t y);
     void placeWall(size_t x, size_t y);
-    void solve(size_t algInt);
+    std::vector<std::vector<int>> solve(size_t algInt);
     bool solveDFS(std::shared_ptr<Node> node);
     void solveBFS();
     void drawPath(std::shared_ptr<Node> node);

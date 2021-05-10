@@ -4,6 +4,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "option.h"
+#include "board.h"
+#include "dragon.h"
 
 class Game : public QGraphicsView
 {
@@ -25,11 +27,15 @@ public:
 public slots:
     void startAndNext();
     void startGame();
+    void win();
+    void awakeDragon();
 
 private:
     double sizeRatio;
     Option* optionMenu;
     std::array<int,5> data;
+    Board* board;
+    Dragon* dragon;
 };
 
 #endif // GAME_H
