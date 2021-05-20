@@ -6,6 +6,7 @@
         <file>resources/borders2.png</file>
         <file>resources/defeat.png</file>
         <file>resources/victory.png</file>
+        <file>resources/icon.jpg</file>
     </qresource>
     <qresource prefix="/buttons">
         <file>resources/quitbutton.png</file>
@@ -62,5 +63,12 @@
         <file>resources/icesleep.png</file>
         <file>resources/stormfire.png</file>
         <file>resources/stormsleep.png</file>
+    </qresource>
+    <qresource prefix="/sound">
+        <file>resources/firegoldsound.wav</file>
+        <file>resources/icesound.wav</file>
+        <file>resources/sleepsound.wav</file>
+        <file>resources/stormsound.wav</file>
+        <file>resources/victorysound.wav</file>
     </qresource>
 </RCC>

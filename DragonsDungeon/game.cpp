@@ -22,11 +22,25 @@ Game::Game(double _sizeRatio, QWidget* parent)
 
     // making ready option menu
     optionMenu = new Option(sizeRatio);
+
+    // initialize background music
+    playList = new QMediaPlaylist();
+    playList->addMedia(QUrl("qrc:/sound/resources/sleepsound.wav"));
+    playList->setPlaybackMode(QMediaPlaylist::Loop);
+    music = new QMediaPlayer();
+    music->setPlaylist(playList);
+
+    // victory sound
+    victorySound = new QMediaPlayer();
+    victorySound->setMedia(QUrl("qrc:/sound/resources/victorysound.wav"));
 }
 
 Game::~Game()
 {
     delete scene;
+    delete music;
+    delete playList;
+    delete victorySound;
 }
 
 void Game::displayStartMenu()
@@ -53,6 +67,8 @@ void Game::displayStartMenu()
 
 void Game::startAndNext()
 {
+    victorySound->stop();
+    music->stop();
     optionMenu->setUp();
     Button* begin {new Button(QString("begin"), optionMenu)};
     begin->setScale(sizeRatio);
@@ -71,6 +87,7 @@ void Game::startGame()
     // make scene ready
     scene->clear();
     setBackgroundBrush(QBrush(QImage(":/img/resources/startGame.png").scaled(1200*sizeRatio, 800*sizeRatio)));
+    music->play();
 
     // draw board
     board = new Board(data, sizeRatio);
@@ -107,6 +124,8 @@ void Game::startGame()
 
 void Game::win()
 {
+    music->stop();
+    victorySound->play();
     QGraphicsPixmapItem* victory = new QGraphicsPixmapItem(QPixmap(":/img/resources/victory.png"));
     victory->setScale(sizeRatio);
     victory->setPos(891*sizeRatio, 277*sizeRatio);
@@ -115,6 +134,7 @@ void Game::win()
 
 void Game::awakeDragon()
 {
+    music->stop();
     dragon->fireDragon();
     board->solve();
     QGraphicsPixmapItem* defeat = new QGraphicsPixmapItem(QPixmap(":/img/resources/defeat.png"));

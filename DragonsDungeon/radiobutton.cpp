@@ -11,6 +11,7 @@ RadioButton::RadioButton(int _id, QGraphicsItem *parent)
 
 void RadioButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event);
     if (!checked)
     {
         setPixmap(QPixmap(":/option/resources/radiochecked.png"));
@@ -21,6 +22,7 @@ void RadioButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void RadioButton::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
+    Q_UNUSED(event);
     if (!checked)
     {
         setPixmap(QPixmap(":/option/resources/radiohover.png"));
@@ -29,6 +31,7 @@ void RadioButton::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
 void RadioButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
+    Q_UNUSED(event);
     if (!checked)
     {
         setPixmap(QPixmap(":/option/resources/radio.png"));

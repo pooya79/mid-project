@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include "option.h"
 #include "board.h"
 #include "dragon.h"
@@ -36,6 +38,9 @@ private:
     std::array<int,5> data;
     Board* board;
     Dragon* dragon;
+    QMediaPlaylist* playList;
+    QMediaPlayer* music;
+    QMediaPlayer* victorySound;
 };
 
 #endif // GAME_H
