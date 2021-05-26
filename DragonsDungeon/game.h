@@ -21,7 +21,6 @@ public:
 
     // public methods
     void displayStartMenu();
-    void displayOptionMenu();
 
     // public attributes
     QGraphicsScene* scene;

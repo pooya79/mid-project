@@ -81,9 +81,9 @@ void Maze::createMaze(size_t x, size_t y)
                 maze[x+1][y]->setValue(2);
                 placeWall(x+1, y);
                 createMaze(x+1,y);
-                randNum = std::rand() % 4;
-                break;
             }
+            randNum = std::rand() % 4;
+            break;
 
         case 1:
             if (maze[x-1][y]->getValue() == 0)
@@ -93,9 +93,9 @@ void Maze::createMaze(size_t x, size_t y)
                 maze[x-1][y]->setValue(2);
                 placeWall(x-1, y);
                 createMaze(x-1,y);
-                randNum = std::rand() % 4;
-                break;
             }
+            randNum = std::rand() % 4;
+            break;
 
         case 2:
             if (maze[x][y+1]->getValue() == 0)
@@ -105,9 +105,9 @@ void Maze::createMaze(size_t x, size_t y)
                 maze[x][y+1]->setValue(2);
                 placeWall(x, y+1);
                 createMaze(x,y+1);
-                randNum = std::rand() % 4;
-                break;
             }
+            randNum = std::rand() % 4;
+            break;
 
         case 3:
             if (maze[x][y-1]->getValue() == 0)
@@ -120,8 +120,8 @@ void Maze::createMaze(size_t x, size_t y)
                 randNum = std::rand() % 4;
                 break;
             }
-        default:
             randNum = std::rand() % 4;
+            break;
         }
     }
 }
@@ -201,12 +201,15 @@ bool Maze::solveDFS(std::shared_ptr<Maze::Node> node)
 {
     bool isWinhere {false};
     isWinhere = node->getIsWin();
-    for (const auto& child : node->children)
+    if (!isWinhere)
     {
-        if (solveDFS(child))
+        for (const auto& child : node->children)
         {
-            isWinhere = true;
-            break;
+            if (solveDFS(child))
+            {
+                isWinhere = true;
+                break;
+            }
         }
     }
     if (isWinhere)

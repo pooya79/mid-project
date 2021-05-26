@@ -3,7 +3,6 @@
 #include <QIcon>
 #include "game.h"
 
-Game* game;
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +12,8 @@ int main(int argc, char *argv[])
     double screenSizeRatio {1};
     if (screenSize.width() < 1200 || screenSize.height() < 800)
         screenSizeRatio = 0.75;
+
+    Game* game;
     game = new Game(screenSizeRatio);
     game->show();
     game->displayStartMenu();
