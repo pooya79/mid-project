@@ -3,9 +3,14 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QMouseEvent>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QSlider>
+#include <QGraphicsProxyWidget>
+#include <QThread>
 #include "option.h"
+#include "button.h"
 #include "board.h"
 #include "dragon.h"
 
@@ -30,6 +35,9 @@ public slots:
     void startGame();
     void win();
     void awakeDragon();
+    void characterGoClicked();
+    void characterGo();
+    void changeSpeed(int v);
 
 private:
     double sizeRatio;
@@ -40,6 +48,9 @@ private:
     QMediaPlaylist* playList;
     QMediaPlayer* music;
     QMediaPlayer* victorySound;
+    Button* characterGoButton;
+    QGraphicsProxyWidget* proxySpeedSlider;
+    QThread thread;
 };
 
 #endif // GAME_H

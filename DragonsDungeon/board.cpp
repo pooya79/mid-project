@@ -24,14 +24,17 @@ void Board::setUp()
     }
     int x = 400*sizeRatio - (data[1]+2)*blockSize/2;
     int y = 400*sizeRatio - (data[0]+2)*blockSize/2;
+    setPos(x,y);
     Maze maze {(size_t)data[0], (size_t)data[1]};
+    qDebug() << "here";
     mazeData = maze.solve((size_t)data[2]);
-    drawMaze(blockSize, x, y);
+    qDebug() << "still here";
+    drawMaze(blockSize, 0, 0);
 
     // draw character
     charPos = new QPair<int,int>(1,0);
-    character = new Character(data[3], blockSize, mazeData, charPos, this);
-    character->setPos(x+blockSize*0,y+blockSize*1);
+    character = new Character(data[3], blockSize, mazeData, charPos, maze.getRoot(),maze.getGoal() , this);
+    character->setPos(blockSize*0,blockSize*1);
     connect(character, &Character::win,
             [this]{emit win(); character->clearFocus();});
     // make character focusable
@@ -41,8 +44,6 @@ void Board::setUp()
 
 void Board::solve()
 {
-    character->clearFocus();
-    character->dead();
     QPixmap solvePave;
     if (data[4] == 1)
     {
@@ -65,9 +66,15 @@ void Board::solve()
         for (size_t j{}, m{mazeData[i].size()}; j<m; j++)
         {
             if (mazeData[i][j] == 1 || mazeData[i][j] == 5)
-                mazeBlocks[i][j]->setPixmap(solvePave.scaled(blockSize,blockSize));
+            {
+                QGraphicsPixmapItem* firePave = new QGraphicsPixmapItem(solvePave.scaled(blockSize, blockSize), this);
+                firePave->setPos(mazeBlocks[i][j]->pos());
+                delete mazeBlocks[i][j];
+            }
         }
     }
+    character->clearFocus();
+    character->dead();
 }
 
 void Board::drawMaze(int blockSize, int x, int y)
@@ -76,9 +83,9 @@ void Board::drawMaze(int blockSize, int x, int y)
     QPixmap wall {":blocks/resources/wall.png"};
     QPixmap solidWall {":blocks/resources/solidwall.png"};
     QPixmap entrance {":blocks/resources/entrance.png"};
+    mazeBlocks.resize(mazeData.size());
     for (size_t i{}, n{mazeData.size()}; i<n ;i++)
     {
-        mazeBlocks.resize(n);
         for (size_t j{}, m{mazeData[i].size()}; j<m; j++)
         {
             QGraphicsPixmapItem* block = new QGraphicsPixmapItem(this);
@@ -105,5 +112,20 @@ void Board::drawMaze(int blockSize, int x, int y)
             mazeBlocks[i].push_back(block);
         }
     }
+}
+
+void Board::characterGo()
+{
+    character->characterGo(data[2]);
+}
+
+void Board::characterStop()
+{
+    character->characterStop();
+}
+
+void Board::changeSpeed(int v)
+{
+    character->changeSpeed(v);
 }
 

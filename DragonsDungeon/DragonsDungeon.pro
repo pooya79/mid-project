@@ -1,6 +1,5 @@
 QT += widgets \
     multimedia
-
 CONFIG += c++14
 
 # You can make your code fail to compile if it uses deprecated APIs.

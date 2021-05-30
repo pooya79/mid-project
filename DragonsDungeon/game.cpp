@@ -1,13 +1,11 @@
 #include "game.h"
-#include "button.h"
-#include <QMouseEvent>
-#include <QtDebug>
 
 
 Game::Game(double _sizeRatio, QWidget* parent)
     : QGraphicsView(parent)
     , sizeRatio {_sizeRatio}
     , data {}
+    , board {nullptr}
 {
     // set up the screen
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -67,8 +65,13 @@ void Game::displayStartMenu()
 
 void Game::startAndNext()
 {
+    // when going from game menu to option menu
+    if (board)
+        board->characterStop();
     victorySound->stop();
     music->stop();
+
+    // draw option menu
     optionMenu->setUp();
     Button* begin {new Button(QString("begin"), optionMenu)};
     begin->setScale(sizeRatio);
@@ -96,7 +99,7 @@ void Game::startGame()
     scene->addItem(board);
 
     // side menu
-    QGraphicsPixmapItem* sideBorder = new QGraphicsPixmapItem(QPixmap(":/img/resources/borders2.png").scaled(393, 400));
+    QGraphicsPixmapItem* sideBorder = new QGraphicsPixmapItem(QPixmap(":/img/resources/borders2.png").scaled(393, 500));
     sideBorder->setScale(sizeRatio);
     sideBorder->setPos(807*sizeRatio, 0);
     Button* next = new Button("next", sideBorder);
@@ -111,11 +114,28 @@ void Game::startGame()
     quit->setPos(51,200);
     connect(quit, &Button::clicked,
             this, &Game::close);
+    characterGoButton = new Button("charactergo", sideBorder);
+    characterGoButton->setPos(51,281);
+    connect(characterGoButton, &Button::clicked,
+            this, &Game::characterGo);
+    proxySpeedSlider = new QGraphicsProxyWidget(sideBorder);
+    QSlider* speedSlider = new QSlider(Qt::Horizontal);
+    speedSlider->setMaximum(100);
+    speedSlider->setMinimum(1);
+    speedSlider->setGeometry(0, 0, 245, 40);
+    connect(speedSlider, &QSlider::sliderMoved,
+            this, &Game::changeSpeed);
+    speedSlider->setStyleSheet(QString("* { background-image : url(:/option/resources/slideBar.png);}"
+                                   "*::groove:horizontal { image : url(:/option/resources/rowLine.png);}"
+                                   "*::handle:hrizontal { image : url(:/option/resources/handle.png);}"));
+    proxySpeedSlider->setWidget(speedSlider);
+    proxySpeedSlider->setPos(68, 304);
+    proxySpeedSlider->setVisible(false);
     scene->addItem(sideBorder);
 
     // draw dragon
     dragon = new Dragon(data[4], sizeRatio);
-    dragon->setPos(800*sizeRatio, 400*sizeRatio);
+    dragon->setPos(800*sizeRatio, 450*sizeRatio);
     scene->addItem(dragon);
 
     // make new option menu ready to start
@@ -124,21 +144,42 @@ void Game::startGame()
 
 void Game::win()
 {
+    board->characterStop();
     music->stop();
     victorySound->play();
     QGraphicsPixmapItem* victory = new QGraphicsPixmapItem(QPixmap(":/img/resources/victory.png"));
     victory->setScale(sizeRatio);
-    victory->setPos(891*sizeRatio, 277*sizeRatio);
+    victory->setPos(891*sizeRatio, 377*sizeRatio);
     scene->addItem(victory);
 }
 
 void Game::awakeDragon()
 {
+    board->characterStop();
     music->stop();
     dragon->fireDragon();
     board->solve();
     QGraphicsPixmapItem* defeat = new QGraphicsPixmapItem(QPixmap(":/img/resources/defeat.png"));
     defeat->setScale(sizeRatio);
-    defeat->setPos(891*sizeRatio, 277*sizeRatio);
+    defeat->setPos(891*sizeRatio, 377*sizeRatio);
     scene->addItem(defeat);
+}
+
+void Game::characterGo()
+{
+    characterGoButton->setVisible(false);
+    proxySpeedSlider->setVisible(true);
+    board->characterGo();
+}
+
+void Game::changeSpeed(int v)
+{
+    board->changeSpeed(v);
+}
+
+void Game::characterGoClicked()
+{
+    moveToThread(&thread);
+    connect(&thread, SIGNAL(started()), this, SLOT(characterGo()));
+    thread.start();
 }

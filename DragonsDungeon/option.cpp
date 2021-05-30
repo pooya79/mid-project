@@ -1,6 +1,5 @@
 #include "option.h"
 #include <QSlider>
-#include <QtDebug>
 #include <QGraphicsProxyWidget>
 
 
@@ -74,13 +73,13 @@ void Option::drawSliders()
 
 void Option::drawSolveAlg()
 {
-    for (int i {1}; i<=2; i++)
+    for (int i {1}; i<=3; i++)
     {
         RadioButton* radioB = new RadioButton(i, this);
         connect(radioB, &RadioButton::pressed,
                 this, &Option::algChanged);
         radioB->setScale(sizeRatio);
-        radioB->setPos((240+227*i)*sizeRatio, 259*sizeRatio);
+        radioB->setPos((314+151*i)*sizeRatio, 259*sizeRatio);
         solveAlg.insert(i, radioB);
     }
 }
@@ -130,15 +129,13 @@ void Option::columnChanged(int _m)
 
 void Option::algChanged(int _id)
 {
-    if (_id == 1)
+    for (int i{1}; i<=3; i++)
     {
-        solveAlg[2]->setPixmap(QPixmap(":/option/resources/radio.png"));
-        solveAlg[2]->setChecked(false);
-    }
-    else
-    {
-        solveAlg[1]->setPixmap(QPixmap(":/option/resources/radio.png"));
-        solveAlg[1]->setChecked(false);
+         if (i != _id)
+        {
+            solveAlg[i]->setPixmap(QPixmap(":/option/resources/radio.png"));
+            solveAlg[i]->setChecked(false);
+        }
     }
     data[2]=_id;
 }

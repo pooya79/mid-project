@@ -24,9 +24,11 @@
         <file>resources/nextbutton.png</file>
         <file>resources/nextclickedbutton.png</file>
         <file>resources/nexthoverbutton.png</file>
+        <file>resources/charactergoclickedbutton.png</file>
+        <file>resources/charactergohoverbutton.png</file>
+        <file>resources/charactergobutton.png</file>
     </qresource>
     <qresource prefix="/option">
-        <file>resources/base.png</file>
         <file>resources/columnLine.png</file>
         <file>resources/rowLine.png</file>
         <file>resources/slideBar.png</file>
@@ -34,6 +36,7 @@
         <file>resources/radio.png</file>
         <file>resources/radiochecked.png</file>
         <file>resources/radiohover.png</file>
+        <file>resources/base.png</file>
     </qresource>
     <qresource prefix="/characters">
         <file>resources/angel.png</file>
@@ -63,6 +66,7 @@
         <file>resources/icesleep.png</file>
         <file>resources/stormfire.png</file>
         <file>resources/stormsleep.png</file>
+        <file>resources/babydragon.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>resources/firegoldsound.wav</file>
@@ -70,5 +74,9 @@
         <file>resources/sleepsound.wav</file>
         <file>resources/stormsound.wav</file>
         <file>resources/victorysound.wav</file>
+    </qresource>
+    <qresource prefix="/footsteps">
+        <file>resources/dragonfootsteps.png</file>
+        <file>resources/footsteps.png</file>
     </qresource>
 </RCC>

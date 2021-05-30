@@ -17,6 +17,9 @@ public:
     void setUp();
     void solve();
     void drawMaze(int blockSize, int x, int y);
+    void characterGo();
+    void characterStop();
+    void changeSpeed(int v);
 
 signals:
     void win();
