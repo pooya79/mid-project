@@ -1,5 +1,4 @@
 #include "maze.h"
-#include <QDebug>
 #include <cstdlib>
 #include <ctime>
 
@@ -244,7 +243,6 @@ void Maze::solveBFS()
         for (auto itr{queue.begin()}; itr!=queue.end(); itr++){
             if ((*itr)->getIsWin())
             {
-                qDebug() << "reached here";
                 drawPath(*itr);
                 return;
             }
@@ -271,8 +269,10 @@ void Maze::solveBS()
     placeParent(tempQueue2, goal);
     while (true)
     {
-        std::list<std::shared_ptr<Maze::Node>> queue1 {std::move(tempQueue1)};
-        std::list<std::shared_ptr<Maze::Node>> queue2 {std::move(tempQueue2)};
+        std::list<std::shared_ptr<Maze::Node>> queue1 {tempQueue1};
+        std::list<std::shared_ptr<Maze::Node>> queue2 {tempQueue2};
+        tempQueue1.clear();
+        tempQueue2.clear();
         for (auto itr1{queue1.begin()}, itr2{queue2.begin()}; itr1!=queue1.end() || itr2!=queue2.end(); turn++){
             if (turn%2 && itr1!=queue1.end())
             {
@@ -310,7 +310,6 @@ std::shared_ptr<Maze::Node> Maze::placeParent(std::list<std::shared_ptr<Maze::No
     {
         if ((*itr)->parent)
         {
-            qDebug() << "I reached here";
             return *itr;
         }
         (*itr)->parent = _parent;

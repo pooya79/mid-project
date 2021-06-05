@@ -4,6 +4,7 @@
 
 Button::Button(QString name, QGraphicsItem* parent)
     : QGraphicsPixmapItem(parent)
+    , c {false}
 {
     // intitialize
     path = QString(":/buttons/resources/") + name + QString("button.png");
@@ -21,7 +22,11 @@ void Button::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
     Q_UNUSED(event);
     setPixmap(clickedPath);
-    emit clicked();
+    if (!c)
+    {
+        c = true;
+        emit clicked();
+    }
 }
 
 void Button::hoverEnterEvent(QGraphicsSceneHoverEvent* event)

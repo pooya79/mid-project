@@ -19,7 +19,7 @@ public:
 
     // auto solve
     void characterGo(int moveAlg);
-    // Move Algs and their heleper functions
+    // Move Algs and their helper functions
     bool DFSGo(std::shared_ptr<Maze::Node> n);
     void BFSGo();
     void DSGoWithBabyDragon();

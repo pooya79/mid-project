@@ -1,7 +1,6 @@
 #include "board.h"
 #include "maze.h"
 #include <iostream>
-#include <QtDebug>
 
 Board::Board(std::array<int, 5> _data, double _sizeRatio, QGraphicsItem *parent)
     : QGraphicsRectItem(parent)
@@ -26,9 +25,7 @@ void Board::setUp()
     int y = 400*sizeRatio - (data[0]+2)*blockSize/2;
     setPos(x,y);
     Maze maze {(size_t)data[0], (size_t)data[1]};
-    qDebug() << "here";
     mazeData = maze.solve((size_t)data[2]);
-    qDebug() << "still here";
     drawMaze(blockSize, 0, 0);
 
     // draw character

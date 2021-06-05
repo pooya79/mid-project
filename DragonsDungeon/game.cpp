@@ -165,6 +165,13 @@ void Game::awakeDragon()
     scene->addItem(defeat);
 }
 
+void Game::characterGoClicked()
+{
+    moveToThread(&thread);
+    connect(&thread, SIGNAL(started()), this, SLOT(characterGo()));
+    thread.start();
+}
+
 void Game::characterGo()
 {
     characterGoButton->setVisible(false);
@@ -177,9 +184,3 @@ void Game::changeSpeed(int v)
     board->changeSpeed(v);
 }
 
-void Game::characterGoClicked()
-{
-    moveToThread(&thread);
-    connect(&thread, SIGNAL(started()), this, SLOT(characterGo()));
-    thread.start();
-}

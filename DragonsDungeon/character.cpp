@@ -3,7 +3,6 @@
 #include <QTimer>
 #include <QEventLoop>
 #include <list>
-#include <QDebug>
 
 Character::Character(int _id, int _size, std::vector<std::vector<int>>& _mazeData, QPair<int, int> *_pos
                      , std::shared_ptr<Maze::Node> _root,std::shared_ptr<Maze::Node> _goal , QGraphicsItem *parent)
@@ -139,7 +138,8 @@ void Character::BFSGo()
     std::list<std::shared_ptr<Maze::Node>> tempQueue {root->neighbors};
     while (m)
     {
-        std::list<std::shared_ptr<Maze::Node>> queue {std::move(tempQueue)};
+        std::list<std::shared_ptr<Maze::Node>> queue {tempQueue};
+        tempQueue.clear();
         for (auto itr{queue.begin()}; itr!=queue.end(); itr++){
             characterMove((*itr));
             if ((*itr)->getIsWin())
@@ -162,8 +162,10 @@ void Character::DSGoWithBabyDragon()
     std::list<std::shared_ptr<Maze::Node>> tempQueue2 {goal->neighbors};
     while (m)
     {
-        std::list<std::shared_ptr<Maze::Node>> queue1 {std::move(tempQueue1)};
-        std::list<std::shared_ptr<Maze::Node>> queue2 {std::move(tempQueue2)};
+        std::list<std::shared_ptr<Maze::Node>> queue1 {tempQueue1};
+        std::list<std::shared_ptr<Maze::Node>> queue2 {tempQueue2};
+        tempQueue1.clear();
+        tempQueue2.clear();
         for (auto itr1{queue1.begin()}, itr2{queue2.begin()}; itr1!=queue1.end() || itr2!=queue2.end(); turn++){
             if (turn%2 && itr1!=queue1.end())
             {

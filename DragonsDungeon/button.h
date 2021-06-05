@@ -22,6 +22,7 @@ signals:
 
 private:
     QString path, hoverPath, clickedPath;
+    bool c;
 };
 
 #endif // BUTTON_H

@@ -44,7 +44,8 @@ public:
     bool solveDFS(std::shared_ptr<Node> node);
     void solveBFS();
     void solveBS();
-    std::shared_ptr<Node> placeParent(std::list<std::shared_ptr<Node>>& _neighbors, std::shared_ptr<Node> _parent);
+    std::shared_ptr<Node> placeParent(std::list<std::shared_ptr<Node>>& _neighbors
+                                      , std::shared_ptr<Node> _parent);
     void merge(std::list<std::shared_ptr<Maze::Node>>&, std::list<std::shared_ptr<Maze::Node>>&);
     void drawPath(std::shared_ptr<Node> node);
 
